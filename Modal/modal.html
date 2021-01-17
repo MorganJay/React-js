@@ -74,7 +74,52 @@
         closeBtn.addEventListener('click', function (e) {
             modal.close();
         });
+        const person = {
+            1: "first",
+            "two": 2
+        };
+        const house = {
+            color: "red",
+            doors: 2,
+            "floor": "no",
+            7: "seven"
+        };
+        //let {1:key, two, color="blue"} = person;
+        let { ...rest } = house;
+        //console.log(key, two, color);
+        //console.log(rest);
+        //const luke = {};
+        //console.log("Before");
 
+        // fetch("https://swapi.dev/api/people/1/").then((response) => {
+        //     return response.json();
+        // }).then((res) => {
+        //     res.films.forEach((url) => {
+        //         fetch(url).then((response) => {
+        //             return response.json();
+        //         }).then((films)=> console.log(films));
+        //     })
+        // });
+        const makeRequest = (url) => {
+            return new Promise((resolve) => {
+                resolve(url)
+            })
+        }
+        (async function getStarWarsData() {
+            try {
+                const peopleResponse = await fetch("https://swapi.dev/api/people/1/");
+                const filmsResponse = await peopleResponse.json();
+                const [filmURL, ...otherUrls] = filmsResponse.films;
+                const response = await fetch(filmURL);
+                const actualMovies = await response.json();
+                for (const key in actualMovies) {
+                    console.log(key.toUpperCase(), actualMovies[key]);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+            //console.log("After");
     </script>
 </body>
 
