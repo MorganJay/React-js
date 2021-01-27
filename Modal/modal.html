@@ -24,11 +24,34 @@
         .show {
             display: initial;
         }
+
+        .fancy {
+            text-align: center;
+            font-family: cursive;
+            font-size: 5em;
+            letter-spacing: 3px;
+            color: slategrey;
+        }
+
+        .letter {
+            transition: all 1s ease;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .letter:hover {
+            transform: rotate(30deg);
+            color: blue;
+        }
+
+        /* .rotate {
+            transform: matrix(3, 0, 0, 0, 45, 0);
+        } */
     </style>
 </head>
 
 <body>
-    <h1>OOP Modal</h1>
+    <h3>OOP Modal</h3>
     <ul>
         <li>Create a button that will open a modal.</li>
         <li>Create a button that will close the modal.</li>
@@ -45,6 +68,9 @@
         <button class="js-close-modal">Close</button>
     </div>
     <button class="js-open-modal">Open</button>
+
+    <h1 class="fancy">Final Project</h1>
+
     <script>
         class Modal {
             constructor(title, text) {
@@ -105,20 +131,26 @@
                 resolve(url)
             })
         }
-        (async function getStarWarsData() {
+        async function getStarWarsData() {
             try {
                 const peopleResponse = await fetch("https://swapi.dev/api/people/1/");
                 const filmsResponse = await peopleResponse.json();
                 const [filmURL, ...otherUrls] = filmsResponse.films;
                 const response = await fetch(filmURL);
-                const actualMovies = await response.json();
-                for (const key in actualMovies) {
+                const actualMovie = await response.json();
+                for (const key in actualMovie) {
                     console.log(key.toUpperCase(), actualMovies[key]);
                 }
             } catch (error) {
                 console.log(error);
             }
-        })();
+        };
+        const fancyChar = document.querySelector('.fancy').textContent.replace(" ", "").split("").map((char) => `<span class="letter">${char}</span>`);
+        document.querySelector('.fancy').innerHTML = fancyChar.join("");
+        const letters = [...document.querySelectorAll(".letter")]
+        letters.forEach((letter) => {
+            letter.addEventListener("mouseover", (e) => e.target.classList.add("rotate"))
+        })
             //console.log("After");
     </script>
 </body>

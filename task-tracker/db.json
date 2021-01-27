@@ -1,0 +1,34 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "text": "Buy Milk",
+      "day": "Feb 5th at 4:01pm",
+      "reminder": false
+    },
+    {
+      "id": 2,
+      "text": "Meeting at The Bulb",
+      "day": "January 27th at 1:00am",
+      "reminder": false
+    },
+    {
+      "text": "Drink Water",
+      "day": "now, now",
+      "reminder": true,
+      "id": 3
+    },
+    {
+      "text": "Learn Sass",
+      "day": "Any moment from now",
+      "reminder": false,
+      "id": 4
+    },
+    {
+      "text": "Listen to the service",
+      "day": "24th January at 10:00am",
+      "reminder": false,
+      "id": 5
+    }
+  ]
+}
