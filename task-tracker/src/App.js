@@ -5,6 +5,7 @@ import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import About from './components/About';
 import Footer from './components/Footer';
+
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -35,9 +36,9 @@ const App = () => {
     const response = await fetch('http://localhost:5000/tasks', {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
       },
-      body: JSON.stringify(task)
+      body: JSON.stringify(task),
     });
 
     const data = await response.json(); // wait for task to reach the backend before you set the state
@@ -51,7 +52,7 @@ const App = () => {
   //Delete Tasks
   const deleteTask = async id => {
     await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     });
     setTasks(tasks.filter(task => task.id !== id));
   };
@@ -64,9 +65,9 @@ const App = () => {
       const response = await fetch(`http://localhost:5000/tasks/${id}`, {
         method: 'PUT',
         headers: {
-          'Content-type': 'application/json'
+          'Content-type': 'application/json',
         },
-        body: JSON.stringify(updatedTask)
+        body: JSON.stringify(updatedTask),
       });
 
       const data = await response.json(); // updated task which new reminder setting
@@ -84,7 +85,7 @@ const App = () => {
       <div className="container">
         <Header
           onAdd={() => setShowAddTask(!showAddTask)}
-          showAdd={showAddTask}
+          //showAdd={showAddTask}
         />
         <Route
           path="/"

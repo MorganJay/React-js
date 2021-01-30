@@ -11,23 +11,23 @@ const Header = ({ title, onAdd, showAdd }) => {
   return (
     <header className="header">
       <h1>{title}</h1>
-      {/* {location.pathname === '/' && ( */}
-      <Button
-        color={showAdd ? 'red' : 'green'}
-        text={showAdd ? 'Close' : 'Add'}
-        onClick={onAdd}
-      />
-      {/* // )} */}
+      {location.pathname === '/' && (
+        <Button
+          color={showAdd ? 'red' : 'green'}
+          text={showAdd ? 'Close' : 'Add'}
+          onClick={onAdd}
+        />
+      )}
     </header>
   );
 };
 
 Header.defaultProps = {
-  title: 'Task Tracker'
+  title: 'Task Tracker',
 };
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 //CSS in JS
