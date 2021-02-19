@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  padding: 20px 0 0 0;
+  font-family: sans-serif;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
