@@ -1,0 +1,13 @@
+.new-quote {
+  color: white;
+  padding: 0.5rem 1.8rem;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(90deg, #f27121, #e94057, #8a2387);
+}
+
+.new-quote:hover {
+  opacity: 0.5;
+}

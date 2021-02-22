@@ -1,0 +1,17 @@
+.twitter-button {
+  color: white;
+  background-color: transparent;
+  font-size: 1.3rem;
+  border: none;
+  cursor: pointer;
+}
+
+.twitter-button:hover {
+  opacity: 0.5;
+}
+
+.fa-twitter {
+  color: #38a1f3;
+  margin-right: 10px;
+  font-size: 25px;
+}

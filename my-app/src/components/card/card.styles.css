@@ -1,0 +1,32 @@
+
+
+.card {
+  width: 500px;
+  padding: 20px;
+  height: 250px;
+  background-color: #0b121f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 10px;
+  color: white;
+  margin: 0 auto;
+  font-size: 22px;
+}
+
+.quote-container {
+  text-align: center;
+}
+
+.author {
+  margin-top: 20px;
+  color: grey;
+}
+
+.buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
