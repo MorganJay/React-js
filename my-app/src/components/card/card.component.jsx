@@ -19,8 +19,8 @@ const Card = () => {
     return data;
   };
 
-  const tweetQuote = () => {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${this.state.quotes.content} - ${this.state.quotes.author}`;
+  const tweetQuote = (number) => {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quotes[number].text} - ${quotes[number].author}`;
     window.open(twitterUrl, '_blank');
   };
 
@@ -41,7 +41,7 @@ const Card = () => {
         <p className="author">{quotes.length > 0 ? quotes[number].author : 'Loading'}</p>
       </div>
       <div className="buttons-container">
-        <TwitterButton />
+        <TwitterButton onClick={() => tweetQuote(number)}/>
         <QuoteButton onClick={getRandomNumber} />
       </div>
     </div>

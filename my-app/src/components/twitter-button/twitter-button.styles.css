@@ -4,9 +4,11 @@
   font-size: 1.3rem;
   border: none;
   cursor: pointer;
+  outline: none;
 }
 
-.twitter-button:hover {
+.twitter-button:hover,
+.twitter-button:focus {
   opacity: 0.5;
 }
 

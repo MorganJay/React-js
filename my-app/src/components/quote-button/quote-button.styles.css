@@ -8,6 +8,7 @@
   background: linear-gradient(90deg, #f27121, #e94057, #8a2387);
 }
 
-.new-quote:hover {
+.new-quote:hover,
+.new-quote:focus {
   opacity: 0.5;
 }
