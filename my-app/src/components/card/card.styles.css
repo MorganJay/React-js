@@ -1,8 +1,7 @@
-
-
 .card {
   width: 500px;
   padding: 20px;
+  padding-bottom: 0;
   height: 250px;
   background-color: #0b121f;
   display: flex;

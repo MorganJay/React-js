@@ -42,7 +42,7 @@ const Card = () => {
       </div>
       <div className="buttons-container">
         <TwitterButton onClick={() => tweetQuote(number)}/>
-        <QuoteButton onClick={getRandomNumber} />
+        <QuoteButton onClick={() => getRandomNumber()} />
       </div>
     </div>
   );
