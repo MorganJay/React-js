@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import Like from './like';
 
 class TableBody extends Component {
   createKey = (item, column) => item._id + (column.path || column.key);
