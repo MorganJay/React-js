@@ -13,7 +13,7 @@ class Movies extends Component {
     genres: [],
     currentPage: 1,
     pageSize: 4,
-    sortColumn: { path: 'title', order: 'asc' },
+    sortColumn: { path: 'title', order: 'asc' }
   };
 
   componentDidMount() {
@@ -53,11 +53,10 @@ class Movies extends Component {
       currentPage,
       selectedGenre,
       sortColumn,
-      movies: allMovies,
+      movies: allMovies
     } = this.state;
 
     if (count === 0) return <p>There are no movies in the database.</p>;
-
     const filteredMovies =
       selectedGenre && selectedGenre._id
         ? allMovies.filter(m => m.genre._id === selectedGenre._id)
@@ -96,6 +95,36 @@ class Movies extends Component {
             onPageChange={this.handlePageChange}
           />
         </div>
+        {/* <div class="dropdown dropdown-action text-center">
+          <button
+            className="action-icon dropdown-toggle"
+            data-toggle="dropdown"
+            aria-expanded="false"
+            style={{ background: 'transparent', border: 'none'}}
+          >
+          </button>
+          <div
+            class="dropdown-menu dropdown-menu-right"
+            x-placement="bottom-end"
+          >
+            <a
+              class="dropdown-item"
+              href="#"
+              data-toggle="modal"
+              data-target="#edit_employee"
+            >
+              <i class="fa fa-pencil m-r-5"></i> Edit
+            </a>
+            <a
+              class="dropdown-item"
+              href="#"
+              data-toggle="modal"
+              data-target="#delete_employee"
+            >
+              <i class="fa fa-trash-o m-r-5"></i> Delete
+            </a>
+          </div>
+        </div> */}
       </div>
     );
   }
