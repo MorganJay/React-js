@@ -1,8 +1,13 @@
 body {
   margin: 0;
-  padding: 20px 0 0 0;
   font-family: sans-serif;
-  height: 100vh;
-  display: grid;
-  place-items: center;
+  padding: 0 0 0 0;
+}
+
+.navbar {
+  margin-bottom: 30px;
+}
+
+.clickable {
+  cursor: pointer;
 }
