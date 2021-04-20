@@ -19,12 +19,12 @@ const Counters = ({ onReset, counters, onDelete, onIncrement }) => {
     </div>
   );
 };
-// export default Counters;
+
+export default Counters;
 
 // class Counters extends Component {
 //   render() {}
 // }
 
-export default Counters;
 
 // Mount phase lifecycle hooks(constructor, render, componentDidMount), Update(render, componentDidUpdate) Unmount(componentWillUnmount)

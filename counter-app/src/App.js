@@ -1,45 +1,46 @@
-import React, { Component } from "react";
-import "./App.css";
-import NavBar from "./components/navbar";
-import Counters from "./components/counters";
+import React, { Component } from 'react';
+import './App.css';
+import NavBar from './components/navbar';
+import Counters from './components/counters';
 
 class App extends Component {
-  state = {
-    counters: [
-      { id: 1, value: 0 },
-      { id: 2, value: 0 },
-      { id: 3, value: 0 },
-      { id: 4, value: 0 },
-    ],
-  };
   //! when the component mounts
-  constructor(){
+  constructor() {
     super();
-    console.log("App - constructor");
+    this.state = {
+      counters: [
+        { id: 1, value: 0 },
+        { id: 2, value: 0 },
+        { id: 3, value: 0 },
+        { id: 4, value: 0 },
+        { id: 5, value: 0 }
+      ]
+    };
+    console.log('App - constructor');
   }
   //! after the component is in the DOM
-  componentDidMount(){
+  componentDidMount() {
     //AJAX Call
-    console.log("App mounted");
+    console.log('App mounted');
   }
 
-  handleIncrement = (counter) => {
+  handleIncrement = counter => {
     const counters = [...this.state.counters]; // create copies
     const index = counters.indexOf(counter);
     counters[index] = { ...counter };
-    counters[index].value++;
+    counters[index].value = counters[index].value + 1;
     this.setState({ counters });
   };
 
-  handleDelete = (counterId) => {
+  handleDelete = counterId => {
     const counters = this.state.counters.filter(
-      (counter) => counter.id !== counterId
+      counter => counter.id !== counterId
     );
     this.setState({ counters });
   };
 
   handleReset = () => {
-    const counters = this.state.counters.map((counter) => {
+    const counters = this.state.counters.map(counter => {
       counter.value = 0;
       return counter;
     });
@@ -47,12 +48,12 @@ class App extends Component {
   };
 
   render() {
-    console.log("App rendered");
+    console.log('App rendered');
     return (
       <React.Fragment>
         <NavBar
           totalCounters={
-            this.state.counters.filter((counter) => counter.value > 0).length
+            this.state.counters.filter(counter => counter.value > 0).length
           }
         />
         <main className="container">
