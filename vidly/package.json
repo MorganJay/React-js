@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.6.0",
     "font-awesome": "^4.7.0",
+    "joi-browser": "^13.4.0",
     "lodash": "^4.17.10",
     "path-to-regexp": "^0.1.7",
     "prop-types": "^15.7.2",
