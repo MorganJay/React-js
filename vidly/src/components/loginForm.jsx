@@ -16,7 +16,7 @@ class LoginForm extends Component {
 
   validate = () => {
     const options = { abortEarly: false };
-    const {error} = Joi.validate(this.state.account, this.schema, options);
+    const { error } = Joi.validate(this.state.account, this.schema, options);
     if (!error) return null;
 
     const errors = {};
@@ -45,23 +45,20 @@ class LoginForm extends Component {
     console.log('Submitted');
   };
 
-  // validateProperty = ({ name, value }) => {
-  //   if (name === 'username') {
-  //     if (value.trim() === '') return 'Username is required.';
-  //     // ...
-  //   }
-  //   if (name === 'password') {
-  //     if (value.trim() === '') return 'Password is required.';
-  //     // ...
-  //   }
-  // };
+  validateProperty = ({ name, value }) => {
+    const obj = { [name]: value };
+    const schema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(obj, schema);
+
+    return error ? error.details[0].message : null;
+  };
 
   handleChange = ({ currentTarget: input }) => {
     const { name, value } = input;
     const errors = { ...this.state.errors };
-    // const errorMessage = this.validateProperty(input);
-    // if (errorMessage) errors[name] = errorMessage;
-    // else delete errors[name];
+    const errorMessage = this.validateProperty(input);
+    if (errorMessage) errors[name] = errorMessage;
+    else delete errors[name];
 
     const account = { ...this.state.account };
     account[name] = value;
