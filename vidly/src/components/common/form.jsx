@@ -54,6 +54,7 @@ class Form extends Component {
     return (
       <Input
         autoFocus
+        required
         label={label}
         name={name}
         type={type}

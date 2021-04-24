@@ -8,6 +8,7 @@ import Rentals from './components/rentals';
 import NotFound from './components/common/NotFound';
 import MovieForm from './components/movieForm';
 import LoginForm from './components/loginForm';
+import RegisterForm from './components/registerForm';
 
 // query string library for parsing query from location.search  const query = queryString.parse(location.search);
 // example url with query : http://localhost:3000/posts/2018/06?added=now&sortBy=ascending
@@ -21,6 +22,7 @@ class App extends Component {
         <Navbar />
         <main className="container">
           <Switch>
+            <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/movies/:id" component={MovieForm} />
             <Route path="/movies" component={Movies} />
