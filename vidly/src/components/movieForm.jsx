@@ -9,7 +9,6 @@ import Form from './common/form';
 class MoviesForm extends Form {
   state = {
     data: {
-      _id: '',
       title: '',
       genreId: '',
       numberInStock: '',
@@ -25,35 +24,17 @@ class MoviesForm extends Form {
     genreId: Joi.string().required().label('Genre'),
     numberInStock: Joi.number()
       .required()
-      .label('Number in Stock')
       .min(0)
-      .max(100),
+      .max(100)
+      .label('Number in Stock'),
     dailyRentalRate: Joi.number()
       .required()
-      .label('dailyRentalRate')
       .min(0)
       .max(10)
+      .label('Daily Rental Rate')
   };
 
-  mapMovieToViewModel = movie => {
-    const {
-      _id,
-      title,
-      genre: { _id: genreId },
-      numberInStock,
-      dailyRentalRate
-    } = movie;
-    const data = {
-      _id: _id,
-      title: title,
-      genreId: genreId,
-      numberInStock: numberInStock,
-      dailyRentalRate: dailyRentalRate
-    };
-    this.setState({ data });
-  };
-
-  mapToViewModel(movie) {
+  mapDataToView(movie) {
     return {
       _id: movie._id,
       title: movie.title,

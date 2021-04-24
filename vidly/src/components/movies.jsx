@@ -6,6 +6,7 @@ import { paginate } from '../utils/paginate';
 import { getGenres } from '../services/fakeGenreService';
 import MoviesTable from './MoviesTable';
 import _ from 'lodash';
+import Input from './common/input';
 
 class Movies extends Component {
   state = {
@@ -83,7 +84,8 @@ class Movies extends Component {
           >
             New Movie
           </button>
-          <p>Showing {filteredMovies.length} movies in the database.</p>
+          <p className="mb-1">Showing {filteredMovies.length} movies in the database.</p>
+          <Input placeholder="Search..." />
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}
