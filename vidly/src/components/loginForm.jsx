@@ -20,17 +20,10 @@ class LoginForm extends Component {
     if (!error) return null;
 
     const errors = {};
-    for (let item of error.details) errors[item.path[0]] = item.message;
+    for (let item of error.details) 
+      errors[item.path[0]] = item.message;
 
     return errors;
-
-    // const errors = {};
-    // const {
-    //   account: { username, password }
-    // } = this.state;
-    // if (username.trim() === '') errors.username = 'Username is required.';
-    // if (password.trim() === '') errors.password = 'Password is required.';
-
     // return Object.keys(errors).length === 0 ? null : errors; // ? why doesn't the form submit when I return {} instead of null
   };
 
