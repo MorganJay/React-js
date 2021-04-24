@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Joi from 'joi-browser';
 import Input from './input';
+import Select from './select';
 
 class Form extends Component {
   state = { data: {}, errors: {} };
@@ -20,7 +21,7 @@ class Form extends Component {
 
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
-
+    console.log(errors);
     return errors;
     // return Object.keys(errors).length === 0 ? null : errors; // ? why doesn't the form submit when I return {} instead of null
   };
@@ -28,7 +29,7 @@ class Form extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const errors = this.validate();
-
+    console.log(errors);
     this.setState({ errors: errors || {} }); // not clean
     if (errors) return;
 
@@ -53,7 +54,6 @@ class Form extends Component {
 
     return (
       <Input
-        autoFocus
         required
         label={label}
         name={name}
@@ -65,9 +65,24 @@ class Form extends Component {
     );
   }
 
+  renderSelect(name, label, options) {
+    const { data, errors } = this.state;
+    return (
+      <Select
+        label={label}
+        name={name}
+        value={data[name] || ''}
+        onChange={this.handleChange}
+        error={errors[name]}
+        options={options}
+        required
+      />
+    );
+  }
+
   renderButton(label) {
     return (
-      <button disabled={this.validate()} className="btn btn-primary">
+      <button disabled={this.validate()} className="btn btn-primary mt-2">
         {label}
       </button>
     );

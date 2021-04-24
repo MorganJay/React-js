@@ -35,7 +35,6 @@ class MoviesTable extends Component {
 
   render() {
     const { movies, onSort, sortColumn } = this.props;
-
     return (
       <table className="table font-weight-bold">
         <TableHeader

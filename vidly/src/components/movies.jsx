@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Pagination from './common/Pagination';
 import FilterList from './common/FilterList';
-import { getMovies } from '../services/fakeMovieService';
+import { getMovies, deleteMovie } from '../services/fakeMovieService';
 import { paginate } from '../utils/paginate';
 import { getGenres } from '../services/fakeGenreService';
 import MoviesTable from './MoviesTable';
@@ -13,6 +13,7 @@ class Movies extends Component {
     genres: [],
     currentPage: 1,
     pageSize: 4,
+    selectedGenre: null,
     sortColumn: { path: 'title', order: 'asc' }
   };
 
@@ -23,6 +24,7 @@ class Movies extends Component {
 
   handleDelete = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
+    deleteMovie(movie._id)
     this.setState({ movies });
   };
 
@@ -34,17 +36,12 @@ class Movies extends Component {
     this.setState({ movies });
   };
 
-  handlePageChange = page => {
-    this.setState({ currentPage: page });
-  };
+  handlePageChange = page => this.setState({ currentPage: page });
 
-  handleGenreSelect = genre => {
+  handleGenreSelect = genre =>
     this.setState({ selectedGenre: genre, currentPage: 1 });
-  };
 
-  handleSort = sortColumn => {
-    this.setState({ sortColumn });
-  };
+  handleSort = sortColumn => this.setState({ sortColumn });
 
   render() {
     const { length: count } = this.state.movies;
@@ -80,6 +77,12 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
+          <button
+            className="btn btn-primary my-2"
+            onClick={() => this.props.history.push('movies/new')}
+          >
+            New Movie
+          </button>
           <p>Showing {filteredMovies.length} movies in the database.</p>
           <MoviesTable
             movies={movies}
