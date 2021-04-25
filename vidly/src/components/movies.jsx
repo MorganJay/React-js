@@ -7,26 +7,36 @@ import { getGenres } from '../services/fakeGenreService';
 import MoviesTable from './MoviesTable';
 import _ from 'lodash';
 import Input from './common/input';
+import SearchBox from './common/SearchBox';
 
 class Movies extends Component {
   state = {
+    search: '',
     movies: [],
     genres: [],
     currentPage: 1,
     pageSize: 4,
-    selectedGenre: null,
+    selectedGenre: { _id: '', name: 'All Genres' },
     sortColumn: { path: 'title', order: 'asc' }
   };
 
   componentDidMount() {
-    const genres = [{ _id: '', name: 'All Genres' }, ...getGenres()];
+    const genres = [this.state.selectedGenre, ...getGenres()];
     this.setState({ movies: getMovies(), genres });
   }
 
   handleDelete = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
-    deleteMovie(movie._id)
+    deleteMovie(movie._id);
     this.setState({ movies });
+  };
+
+  handleSearch = query => {
+    this.setState({ search: query, selectedGenre: null, currentPage: 1 });
+    const movies = this.state.movies.filter(
+      m => m.title.toLowerCase().indexOf(query) !== -1
+    );
+    query ? this.setState({ movies }) : this.setState({ movies: getMovies() });
   };
 
   handleLike = movie => {
@@ -40,7 +50,12 @@ class Movies extends Component {
   handlePageChange = page => this.setState({ currentPage: page });
 
   handleGenreSelect = genre =>
-    this.setState({ selectedGenre: genre, currentPage: 1 });
+    this.setState({
+      selectedGenre: genre,
+      currentPage: 1,
+      search: '',
+      movies: getMovies()
+    });
 
   handleSort = sortColumn => this.setState({ sortColumn });
 
@@ -51,7 +66,8 @@ class Movies extends Component {
       currentPage,
       selectedGenre,
       sortColumn,
-      movies: allMovies
+      movies: allMovies,
+      search
     } = this.state;
 
     if (count === 0) return <p>There are no movies in the database.</p>;
@@ -84,8 +100,10 @@ class Movies extends Component {
           >
             New Movie
           </button>
-          <p className="mb-1">Showing {filteredMovies.length} movies in the database.</p>
-          <Input placeholder="Search..." />
+          <p className="mb-1">
+            Showing {filteredMovies.length} movies in the database.
+          </p>
+          <SearchBox value={search} onChange={this.handleSearch} />
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}

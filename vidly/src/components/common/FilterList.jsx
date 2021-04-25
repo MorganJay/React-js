@@ -1,24 +1,21 @@
 import React from 'react';
 
-const FilterList = props => {
-  const {
-    items,
-    textProperty,
-    valueProperty,
-    onItemSelect,
-    selectedItem,
-  } = props;
+const FilterList = ({
+  items,
+  textProperty,
+  valueProperty,
+  onItemSelect,
+  selectedItem
+}) => {
   return (
     <div className="list-group">
       {items.map(item => (
         <button
           type="button"
           onClick={() => onItemSelect(item)}
-          className={
-            item === selectedItem
-              ? 'list-group-item list-group-item-action active font-weight-bold'
-              : 'list-group-item list-group-item-action font-weight-bold'
-          }
+          className={`list-group-item list-group-item-action font-weight-bold ${
+            item === selectedItem && 'active'
+          }`}
           key={item[valueProperty]}
         >
           {item[textProperty]}
@@ -30,7 +27,7 @@ const FilterList = props => {
 
 FilterList.defaultProps = {
   textProperty: 'name',
-  valueProperty: '_id',
+  valueProperty: '_id'
 };
 
 export default FilterList;
