@@ -1,13 +1,16 @@
-import React from 'react'
+import React from 'react';
 
 const SearchBox = ({ value, onChange }) => {
-    return (
-      <Input
-        placeholder="Search..."
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
-    );
-}
+  return (
+    <input
+      type="text"
+      name="search"
+      className="form-control my-3"
+      placeholder="Search..."
+      value={value}
+      onChange={e => onChange(e.currentTarget.value)}
+    />
+  );
+};
 
-export default SearchBox
+export default SearchBox;
