@@ -31,7 +31,11 @@ class Movies extends Component {
   };
 
   handleSearch = query =>
-    this.setState({ search: query, selectedGenre: null, currentPage: 1 });
+    this.setState({
+      search: query.toLowerCase(),
+      selectedGenre: null,
+      currentPage: 1
+    });
 
   handleLike = movie => {
     const movies = [...this.state.movies];
@@ -65,10 +69,10 @@ class Movies extends Component {
     let filtered = allMovies;
     if (search) {
       filtered = allMovies.filter(
-        m => m.title.toLowerCase().indexOf(search.toLowerCase()) !== -1
+        m => m.title.toLowerCase().indexOf(search) !== -1
       );
     } else if (selectedGenre && selectedGenre._id)
-        filtered = allMovies.filter(m => m.genre._id === selectedGenre._id);
+      filtered = allMovies.filter(m => m.genre._id === selectedGenre._id);
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
