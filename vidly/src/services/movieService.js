@@ -1,21 +1,28 @@
 import http from './httpService';
 import { apiUrl } from '../config.json';
-import { getGenre } from './genreService';
+
+const apiEndpoint = `${apiUrl}/movies`;
+
+function movieUrl(id) {
+  return `${apiEndpoint}/${id}`;
+}
 
 export function getMovies() {
-  return http.get(`${apiUrl}/movies`);
+  return http.get(apiEndpoint);
 }
 
 export function deleteMovie(id) {
-  http.delete(`${apiUrl}/movies/${id}`);
+  http.delete(movieUrl(id));
 }
 
 export function getMovie(id) {
-  return http.get(`${apiUrl}/movies/${id}`);
+  return http.get(movieUrl(id));
 }
 
 export function saveMovie(movie) {
-  if (!movie._id) return http.post(`${apiUrl}/movies`, movie);
+  if (!movie._id) return http.post(apiEndpoint, movie);
 
-  return http.put(`${apiUrl}/movies/${movie._id}`, movie);
+  const body = { ...movie };
+  delete body._id;
+  return http.put(movieUrl(movie._id), body);
 }

@@ -70,10 +70,10 @@ class MoviesForm extends Form {
 
   doSubmit = async () => {
     try {
-      const { data: movie } = await saveMovie(this.state.data);
-      if (movie) this.props.history.replace('/movies');
+      await saveMovie(this.state.data);
+      this.props.history.replace('/movies');
     } catch (ex) {
-      toast.error('An error occurred');
+      toast.error('An unexpected error occurred');
       console.log(ex);
     }
   };
