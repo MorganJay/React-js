@@ -31,7 +31,7 @@ class RegisterForm extends Form {
       localStorage.setItem('token', headers['x-auth-token']);
       toast.success('User successfully registered');
       setTimeout(() => {
-        this.props.history.push('/');
+        window.location = '/';
       }, 300);
     } catch (error) {
       if (handleExpectedError(error, 400)) {
