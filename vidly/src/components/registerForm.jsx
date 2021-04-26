@@ -1,11 +1,13 @@
 import React from 'react';
 import Joi from 'joi-browser';
+import { toast } from 'react-toastify';
+
+import Form from './common/form';
 
 import { handleExpectedError } from './../services/httpService';
 import * as userService from '../services/userService';
+import auth from '../services/authService';
 
-import Form from './common/form';
-import { toast } from 'react-toastify';
 
 class RegisterForm extends Form {
   state = {
@@ -28,7 +30,7 @@ class RegisterForm extends Form {
   doSubmit = async () => {
     try {
       const { headers } = await userService.register(this.state.data);
-      localStorage.setItem('token', headers['x-auth-token']);
+      auth.loginWithJwt(headers['x-auth-token']);
       toast.success('User successfully registered');
       setTimeout(() => {
         window.location = '/';
