@@ -3,6 +3,10 @@ import logger from './logService';
 
 import { toast } from 'react-toastify';
 
+export function handleExpectedError(error, statusCode) {
+  return error.response && error.response.status === statusCode;
+}
+
 axios.interceptors.response.use(null, error => {
   const expectedError =
     error.response &&

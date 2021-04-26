@@ -2,6 +2,7 @@ import React from 'react';
 import Joi, { errors } from 'joi-browser';
 
 import * as userService from '../services/userService';
+import { handleExpectedError } from './../services/httpService';
 
 import Form from './common/form';
 import { toast } from 'react-toastify';
@@ -28,7 +29,7 @@ class RegisterForm extends Form {
     try {
       await userService.register(this.state.data);
     } catch (error) {
-      if(ex.response && ex.response.status === 400){
+      if(handleExpectedError(error, 400)){
         const errors = {...this.state.errors};
         errors.username = ex.response.data;
         this.setState({ errors })

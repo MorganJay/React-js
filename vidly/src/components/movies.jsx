@@ -11,6 +11,7 @@ import FilterList from './common/FilterList';
 import MoviesTable from './MoviesTable';
 import SearchBox from './common/SearchBox';
 import Loading from './common/loading';
+import { handleExpectedError } from './../services/httpService';
 
 class Movies extends Component {
   state = {
@@ -38,7 +39,7 @@ class Movies extends Component {
     try {
       await deleteMovie(movie._id);
     } catch (ex) {
-      if (ex.response && ex.response.status === 404)
+      if (handleExpectedError(ex, 404))
         toast.error('This movie has already been deleted or does not exist.');
 
       this.setState({ movies: originalMovies });
