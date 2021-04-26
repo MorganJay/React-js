@@ -1,7 +1,10 @@
 import React from 'react';
-import Joi from 'joi-browser';
+import Joi, { errors } from 'joi-browser';
+
+import * as userService from '../services/userService';
 
 import Form from './common/form';
+import { toast } from 'react-toastify';
 
 class RegisterForm extends Form {
   state = {
@@ -21,14 +24,22 @@ class RegisterForm extends Form {
       .regex(/^(?![\s.]+$)[a-zA-Z\s.]*$/)
   };
 
-  doSubmit = () => {
-    // Call the server
-    console.log('Submitted');
+  doSubmit = async () => {
+    try {
+      await userService.register(this.state.data);
+    } catch (error) {
+      if(ex.response && ex.response.status === 400){
+        const errors = {...this.state.errors};
+        errors.username = ex.response.data;
+        this.setState({ errors })
+      }
+      toast.error(ex.response.data)
+    }
   };
 
   render() {
     return (
-      <div>
+      <div className="w-50 mt-5">
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('username', 'Username')}
