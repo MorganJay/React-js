@@ -105,15 +105,15 @@ class Movies extends Component {
     const { totalCount, data: movies } = this.getPagedData();
 
     return (
-      <div className="row">
-        <div className="col-4 col-sm-12 mb-sm-2">
+      <div className="row" style={{ width: 'inherit' }}>
+        <div className="col col-sm-12 col-md-3 mb-sm-2">
           <FilterList
             items={this.state.genres}
             selectedItem={this.state.selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
         </div>
-        <div className="col ">
+        <div className="col col-md-9">
           <button
             className="btn btn-primary my-2"
             onClick={() => this.props.history.push('movies/new')}

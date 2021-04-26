@@ -1,5 +1,6 @@
 import React from 'react';
 import Joi from 'joi-browser';
+import { toast } from 'react-toastify';
 
 import { getGenres } from '../services/genreService';
 import { saveMovie, getMovie } from '../services/movieService';
@@ -51,15 +52,23 @@ class MoviesForm extends Form {
     const movieId = this.props.match.params.id;
     if (movieId === 'new') return;
 
-    const { data: movie } = await getMovie(movieId);
-    if (!movie) return this.props.history.replace('/not-found');
-
-    this.setState({ data: this.mapDataToView(movie) });
+    try {
+      const { data: movie } = await getMovie(movieId);
+      this.setState({ data: this.mapDataToView(movie) });
+    } catch (error) {
+      if (ex.response && ex.response.status === 404)
+        this.props.history.replace('/not-found');
+    }
   }
 
-  doSubmit = () => {
-    saveMovie(this.state.data);
-    this.props.history.replace('/movies');
+  doSubmit = async () => {
+    try {
+      const { data: movie } = await saveMovie(this.state.data);
+      if (movie) this.props.history.replace('/movies');
+    } catch (ex) {
+      toast.error('An error occurred');
+      console.log(ex);
+    }
   };
 
   render() {

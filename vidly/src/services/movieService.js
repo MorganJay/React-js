@@ -11,20 +11,11 @@ export function deleteMovie(id) {
 }
 
 export function getMovie(id) {
-  return http.get(`${apiUrl}/movies/${id}`)
+  return http.get(`${apiUrl}/movies/${id}`);
 }
 
 export function saveMovie(movie) {
-  let movieInDb = getMovie(movie.id) || {};
+  if (!movie._id) return http.post(`${apiUrl}/movies`, movie);
 
-//   movieInDb.title = movie.title;
-//   movieInDb.genre = getGenre(movie.genreId);
-//   movieInDb.numberInStock = movie.numberInStock;
-//   movieInDb.dailyRentalRate = movie.dailyRentalRate;
-
-  if (!movieInDb._id) {
-    movieInDb._id = Date.now().toString();
-   return http.post(`${apiUrl}/movies`, movieInDb);
-  }
-  return http.put(`${apiUrl}/movies/${id}`, movieInDb);
+  return http.put(`${apiUrl}/movies/${movie._id}`, movie);
 }
