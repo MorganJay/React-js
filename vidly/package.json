@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sentry/browser": "^6.3.1",
+    "@sentry/react": "^6.3.1",
+    "@sentry/tracing": "^6.3.1",
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "font-awesome": "^4.7.0",
     "joi-browser": "^13.4.0",
@@ -13,7 +17,8 @@
     "react": "^17.0.1",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^4.0.1",
+    "react-toastify": "^7.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
