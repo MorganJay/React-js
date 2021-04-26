@@ -2,6 +2,11 @@ body {
   margin: 0;
   font-family: sans-serif;
   padding: 0 0 0 0;
+  height: 100vh;
+}
+
+#root{
+  height: 100%;
 }
 
 .navbar {

@@ -21,7 +21,7 @@ class Form extends Component {
 
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
-    console.log(errors);
+
     return errors;
     // return Object.keys(errors).length === 0 ? null : errors; // ? why doesn't the form submit when I return {} instead of null
   };

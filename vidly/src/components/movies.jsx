@@ -10,6 +10,7 @@ import Pagination from './common/Pagination';
 import FilterList from './common/FilterList';
 import MoviesTable from './MoviesTable';
 import SearchBox from './common/SearchBox';
+import Loading from './common/loading';
 
 class Movies extends Component {
   state = {
@@ -26,7 +27,7 @@ class Movies extends Component {
     const { data } = await getGenres();
     const genres = [this.state.selectedGenre, ...data];
     const { data: movies } = await getMovies();
-    this.setState({ movies, genres }, () => toast('data loaded'));
+    this.setState({ movies, genres }, () => toast('Enjoy!!'));
   }
 
   handleDelete = async movie => {
@@ -99,20 +100,20 @@ class Movies extends Component {
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, sortColumn, search } = this.state;
 
-    if (count === 0) return <p>There are no movies in the database.</p>;
+    if (count === 0) return <Loading />;
 
     const { totalCount, data: movies } = this.getPagedData();
 
     return (
       <div className="row">
-        <div className="col-3">
+        <div className="col-4 col-sm-12 mb-sm-2">
           <FilterList
             items={this.state.genres}
             selectedItem={this.state.selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
         </div>
-        <div className="col">
+        <div className="col ">
           <button
             className="btn btn-primary my-2"
             onClick={() => this.props.history.push('movies/new')}

@@ -24,7 +24,7 @@ class App extends Component {
       <>
         <ToastContainer />
         <Navbar />
-        <main className="container">
+        <main className="container h-auto d-flex justify-content-center align-items-center">
           <Switch>
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
