@@ -27,7 +27,7 @@ class RegisterForm extends Form {
 
   doSubmit = async () => {
     try {
-      await userService.register(this.state.data);
+     const response = await userService.register(this.state.data);
       toast.success('User successfully registered');
       this.setState({ data: { username: '', password: '', email: '' } });
     } catch (error) {
