@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-
-import 'react-toastify/dist/ReactToastify.css';
+import jwtDecode from 'jwt-decode';
 
 import Navbar from './components/common/Navbar';
 import Movies from './components/movies';
@@ -13,17 +12,28 @@ import MovieForm from './components/movieForm';
 import LoginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
 
+import 'react-toastify/dist/ReactToastify.css';
 // query string library for parsing query from location.search  const query = queryString.parse(location.search);
 // example url with query : http://localhost:3000/posts/2018/06?added=now&sortBy=ascending
 // <Route path="/posts/:year?/:month?" component={Posts} />
 // parse accordingly when working with numbers or booleans
 
 class App extends Component {
+  state = {};
+
+  componentDidMount() {
+    try {
+      const jwt = localStorage.getItem('token');
+      const user = jwtDecode(jwt);
+      this.setState({ user });
+    } catch (error) {}
+  }
+
   render() {
     return (
       <>
         <ToastContainer />
-        <Navbar />
+        <Navbar user={this.state.user} />
         <main className="container h-auto d-flex justify-content-center align-items-center">
           <Switch>
             <Route path="/register" component={RegisterForm} />
