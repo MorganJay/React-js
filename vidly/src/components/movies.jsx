@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import Loading from './common/loading';
 import Pagination from './common/Pagination';
@@ -102,7 +102,6 @@ class Movies extends Component {
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, sortColumn, search } = this.state;
     const { user } = this.props;
-
     if (count === 0) return <Loading />;
 
     const { totalCount, data: movies } = this.getPagedData();
