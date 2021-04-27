@@ -24,7 +24,7 @@ class App extends Component {
   state = {};
 
   componentDidMount() {
-    const user = auth.getCurrentUser();
+    const user = auth.currentUser;
     this.setState({ user });
   }
 

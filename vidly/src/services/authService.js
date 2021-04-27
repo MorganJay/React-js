@@ -32,5 +32,13 @@ export function getJwt() {
 }
 
 http.setJwt(getJwt());
+const currentUser = getCurrentUser();
 
-export default { login, loginWithJwt, logout, getCurrentUser, getJwt };
+export default {
+  login,
+  loginWithJwt,
+  logout,
+  currentUser,
+  getCurrentUser,
+  getJwt
+};

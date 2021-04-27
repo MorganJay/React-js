@@ -37,9 +37,8 @@ class MoviesTable extends Component {
 
   constructor() {
     super();
-    const user = auth.getCurrentUser(); // TODO: refactor to use auth.currentUser;
+    const user = auth.currentUser;
     if (user && user.isAdmin) this.columns.push(this.deleteColumn);
-    console.log(user);
   }
 
   render() {
