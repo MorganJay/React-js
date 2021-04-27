@@ -11,12 +11,8 @@ export function getMovies() {
   return http.get(apiEndpoint);
 }
 
-export function deleteMovie(id) {
-  http.delete(movieUrl(id));
-}
-
-export function getMovie(id) {
-  return http.get(movieUrl(id));
+export function getMovie(movieId) {
+  return http.get(movieUrl(movieId));
 }
 
 export function saveMovie(movie) {
@@ -25,4 +21,8 @@ export function saveMovie(movie) {
   const body = { ...movie };
   delete body._id;
   return http.put(movieUrl(movie._id), body);
+}
+
+export function deleteMovie(movieId) {
+  return http.delete(movieUrl(movieId));
 }

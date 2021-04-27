@@ -5,10 +5,8 @@ class TableBody extends Component {
   createKey = (item, column) => item._id + (column.path || column.key);
 
   renderCell = (item, column) => {
-    let { dailyRentalRate: dollarRate } = item;
     if (column.content) return column.content(item);
-    if (column.path.search('Rate') !== -1)
-      item.dailyRentalRate = '$' + dollarRate;
+
     return _.get(item, column.path);
   };
 

@@ -28,17 +28,26 @@ class App extends Component {
   }
 
   render() {
+    const { user } = this.state;
     return (
       <>
         <ToastContainer />
-        <Navbar user={this.state.user} />
+        <Navbar user={user} />
         <main className="container h-auto d-flex justify-content-center align-items-center">
           <Switch>
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={LogOut} />
-            <Route path="/movies/:id" component={MovieForm} />
-            <Route path="/movies" component={Movies} />
+            <Route
+              path="/movies/:id"
+              render={props =>
+                !user ? <Redirect to="/login" /> : <MovieForm {...props} />
+              }
+            />
+            <Route
+              path="/movies"
+              render={props => <Movies {...props} user={this.state.user} />}
+            />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/not-found" component={NotFound} />

@@ -1,9 +1,11 @@
 import React from 'react';
 import Joi from 'joi-browser';
-
-import auth from '../services/authService';
+import { toast } from 'react-toastify';
 
 import Form from './common/form';
+
+import http from './../services/httpService';
+import auth from '../services/authService';
 
 class LoginForm extends Form {
   state = {
@@ -22,7 +24,7 @@ class LoginForm extends Form {
       await auth.login(username, password);
       window.location = '/';
     } catch (error) {
-      if (handleExpectedError(error, 400)) {
+      if (http.expectedError(error, 400)) {
         const errors = { ...this.state.errors };
         errors.username = error.response.data;
         this.setState({ errors });

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import Form from './common/form';
 
-import { handleExpectedError } from './../services/httpService';
+import http from './../services/httpService';
 import * as userService from '../services/userService';
 import auth from '../services/authService';
 
@@ -36,7 +36,7 @@ class RegisterForm extends Form {
         window.location = '/';
       }, 300);
     } catch (error) {
-      if (handleExpectedError(error, 400)) {
+      if (http.expectedError(error, 400)) {
         const errors = { ...this.state.errors };
         errors.username = error.response.data;
         this.setState({ errors });

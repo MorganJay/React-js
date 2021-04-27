@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom'
 
-import { getGenres } from './../services/genreService';
-import { getMovies, deleteMovie } from '../services/movieService';
-import { paginate } from '../utils/paginate';
-
+import Loading from './common/loading';
 import Pagination from './common/Pagination';
 import FilterList from './common/FilterList';
 import MoviesTable from './MoviesTable';
 import SearchBox from './common/SearchBox';
-import Loading from './common/loading';
-import { handleExpectedError } from './../services/httpService';
+
+import http from './../services/httpService';
+import { getMovies, deleteMovie } from '../services/movieService';
+import { getGenres } from './../services/genreService';
+import { paginate } from '../utils/paginate';
 
 class Movies extends Component {
   state = {
@@ -39,7 +40,7 @@ class Movies extends Component {
     try {
       await deleteMovie(movie._id);
     } catch (ex) {
-      if (handleExpectedError(ex, 404))
+      if (http.expectedError(ex, 404))
         toast.error('This movie has already been deleted or does not exist.');
 
       this.setState({ movies: originalMovies });
@@ -100,6 +101,7 @@ class Movies extends Component {
   render() {
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, sortColumn, search } = this.state;
+    const { user } = this.props;
 
     if (count === 0) return <Loading />;
 
@@ -115,12 +117,11 @@ class Movies extends Component {
           />
         </div>
         <div className="col col-md-9">
-          <button
-            className="btn btn-primary my-2"
-            onClick={() => this.props.history.push('movies/new')}
-          >
-            New Movie
-          </button>
+          {user && (
+            <Link to="movies/new" className="btn btn-primary my-2">
+              New Movie
+            </Link>
+          )}
           <p>Showing {totalCount} movies in the database.</p>
           <SearchBox value={search} onChange={this.handleSearch} />
           <MoviesTable

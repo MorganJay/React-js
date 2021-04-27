@@ -16,7 +16,7 @@ axios.interceptors.response.use(null, error => {
   return Promise.reject(error);
 });
 
-export function handleExpectedError(error, statusCode) {
+export function expectedError(error, statusCode) {
   return error.response && error.response.status === statusCode;
 }
 
@@ -30,5 +30,6 @@ export default {
   put: axios.put,
   patch: axios.patch,
   delete: axios.delete,
-  setJwt
+  setJwt,
+  expectedError
 };

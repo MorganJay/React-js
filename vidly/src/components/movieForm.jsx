@@ -6,7 +6,7 @@ import { getGenres } from '../services/genreService';
 import { saveMovie, getMovie } from '../services/movieService';
 
 import Form from './common/form';
-import { handleExpectedError } from './../services/httpService';
+import http from './../services/httpService';
 
 class MoviesForm extends Form {
   state = {
@@ -59,7 +59,7 @@ class MoviesForm extends Form {
       const { data: movie } = await getMovie(movieId);
       this.setState({ data: this.mapDataToView(movie) });
     } catch (error) {
-      if (handleExpectedError(error, 404))
+      if (http.expectedError(error, 404))
         this.props.history.replace('/not-found');
     }
   }
