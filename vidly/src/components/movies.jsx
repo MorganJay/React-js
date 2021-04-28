@@ -99,10 +99,8 @@ class Movies extends Component {
   };
 
   render() {
-    const { length: count } = this.state.movies;
     const { pageSize, currentPage, sortColumn, search } = this.state;
     const { user } = this.props;
-    if (count === 0) return <Loading />;
 
     const { totalCount, data: movies } = this.getPagedData();
 
